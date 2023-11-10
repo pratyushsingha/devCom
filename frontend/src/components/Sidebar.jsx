@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { category } from "../utlis/filters";
+import { brand, category } from "../utlis/filters";
 import { AppContext } from "../context/AppContext";
 
 const Sidebar = () => {
   const {
     handleCategory,
-    handleCompany,
+    handleBrand,
     query,
     handleInputChange,
     handlePrice,
@@ -30,6 +30,20 @@ const Sidebar = () => {
             name="category"
             value={item.name}
             onChange={handleCategory}
+          />
+          {item.name}
+        </label>
+      ))}
+      <br />
+      <h1 className="text-lg">Brand: </h1>
+      <br />
+      {brand.map((item, index) => (
+        <label key={index}>
+          <input
+            type="radio"
+            name="brand"
+            value={item.name}
+            onChange={handleBrand}
           />
           {item.name}
         </label>
