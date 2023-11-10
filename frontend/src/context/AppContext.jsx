@@ -27,7 +27,7 @@ function getLocalWish() {
 export default function AppContextProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSeletectedCategory] = useState(null);
-  const [selectedCompany, setSeletectedCompany] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedPrice, setSeletectedPrice] = useState(1000);
   const [selectedColor, setSelectedColor] = useState("");
   const [query, setQuery] = useState("");
@@ -62,8 +62,8 @@ export default function AppContextProvider({ children }) {
     setSeletectedCategory(e.target.value);
   }
 
-  function handleCompany(e) {
-    setSeletectedCompany(e.target.value);
+  function handleBrand(e) {
+    setSelectedBrand(e.target.value);
   }
 
   function handlePrice(e) {
@@ -82,23 +82,23 @@ export default function AppContextProvider({ children }) {
 
     if (selectedCategory) {
       filteredProducts = filteredProducts.filter(({ category }) => {
-        if (selectedCategory === "all") {
+        if (selectedCategory === "All") {
           return filteredProducts;
         } else {
-          return category === selectedCategory;
+          return category.toLowerCase() === selectedCategory.toLowerCase();
         }
       });
     }
 
-    // if (selectedCompany) {
-    //   filteredProducts = filteredProducts.filter(({ company }) => {
-    //     if (selectedCompany === "all") {
-    //       return filteredProducts;
-    //     } else {
-    //       return company === selectedCompany;
-    //     }
-    //   });
-    // }
+    if (selectedBrand) {
+      filteredProducts = filteredProducts.filter(({ brand }) => {
+        if (selectedBrand === "All") {
+          return filteredProducts;
+        } else {
+          return brand.toLowerCase() === selectedBrand.toLowerCase();
+        }
+      });
+    }
 
     if (selectedPrice) {
       filteredProducts = filteredProducts.filter(({ price }) => {
@@ -164,7 +164,7 @@ export default function AppContextProvider({ children }) {
     loading,
     handleInputChange,
     filteredItems,
-    handleCompany,
+    handleBrand,
     handleCategory,
     filterData,
     selectedCategory,
@@ -179,6 +179,8 @@ export default function AppContextProvider({ children }) {
     handleColor,
     selectedColor,
     setSelectedColor,
+    handleBrand,
+    selectedBrand,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

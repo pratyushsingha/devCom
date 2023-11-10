@@ -17,13 +17,6 @@ const ProductDetails = () => {
   return (
     <>
       {ProductDetail.map((item) => (
-        // <div key={item.id}>
-        //   <img src={item.image} alt="" />
-        //   <p>{item.title}</p>
-        //   <p>{item.description}</p>
-        //   <button onClick={() => addToCart(item.id)}>add to cart</button>
-        //   <button onClick={() => addToWish(id)}>add to wishlist</button>
-        // </div>
         <section
           key={item.id}
           className="text-gray-600 body-font overflow-hidden"
@@ -37,7 +30,7 @@ const ProductDetails = () => {
               />
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                  BRAND NAME
+                  {item.brand.toLowerCase()}
                 </h2>
                 <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
                   {item.title}
