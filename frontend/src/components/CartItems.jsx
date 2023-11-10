@@ -3,6 +3,7 @@ import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 
 const CartItems = ({ item }) => {
+  // console.log(item);
   const { selectedColor, removeFromCart } = useContext(AppContext);
 
   return (

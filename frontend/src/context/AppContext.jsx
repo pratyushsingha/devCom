@@ -116,16 +116,11 @@ export default function AppContextProvider({ children }) {
       />
     ));
   }
-  const result = filterData(
-    products,
-    selectedCategory,
-    selectedPrice,
-    query
-  );
+  const result = filterData(products, selectedCategory, selectedPrice, query);
   // console.log(result);
 
   function addToCart(id) {
-    const updatedCart = products.find((item) => item.id === id);
+    const updatedCart = products.find((item) => item.id == id);
     setCart([...cart, updatedCart]);
   }
 
