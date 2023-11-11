@@ -29,7 +29,7 @@ export default function AppContextProvider({ children }) {
   const [selectedCategory, setSeletectedCategory] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedPrice, setSeletectedPrice] = useState(1000);
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedRating, setSelectedRating] = useState(null);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState(getLocalCart());
@@ -70,11 +70,13 @@ export default function AppContextProvider({ children }) {
     setSeletectedPrice(e.target.value);
   }
 
-  function handleColor(e) {
-    setSelectedColor(e.target.value);
-  }
-
-  function filterData(products, selectedCategory, selectedPrice, query) {
+  function filterData(
+    products,
+    selectedCategory,
+    selectedPrice,
+    selectedRating,
+    query
+  ) {
     let filteredProducts = products;
     if (query) {
       filteredProducts = filteredItems;
@@ -106,6 +108,12 @@ export default function AppContextProvider({ children }) {
       });
     }
 
+    if (selectedRating) {
+      filteredProducts = filteredProducts.filter(({ rating }) => {
+        return rating.rate <= selectedRating;
+      });
+    }
+
     return filteredProducts.map(({ id, title, price, image, category }) => (
       <ProductItems
         id={id}
@@ -116,7 +124,13 @@ export default function AppContextProvider({ children }) {
       />
     ));
   }
-  const result = filterData(products, selectedCategory, selectedPrice, query);
+  const result = filterData(
+    products,
+    selectedCategory,
+    selectedPrice,
+    selectedRating,
+    query
+  );
   // console.log(result);
 
   function addToCart(id) {
@@ -176,9 +190,7 @@ export default function AppContextProvider({ children }) {
     wishList,
     selectedWish,
     setSelectedWish,
-    handleColor,
-    selectedColor,
-    setSelectedColor,
+    setSelectedRating,
     selectedBrand,
   };
 

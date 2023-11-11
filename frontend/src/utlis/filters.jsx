@@ -34,4 +34,12 @@ export const brand = [
   { name: "Zara" },
 ];
 
+export const rating = [
+  { star: 5, icon: "⭐⭐⭐⭐⭐" },
+  { star: 4, icon: "⭐⭐⭐⭐ ☆" },
+  { star: 3, icon: "⭐⭐⭐ ☆ ☆" },
+  { star: 2, icon: "⭐⭐ ☆ ☆ ☆" },
+  { star: 1, icon: "⭐ ☆ ☆  ☆☆ " },
+];
+
 export const API_URL = "http://localhost:3000/api/products";
