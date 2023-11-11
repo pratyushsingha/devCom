@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-import { API_URL } from "../utlis/filters";
 import ProductItems from "../components/ProductItems";
 
 export const AppContext = createContext();
@@ -39,7 +38,7 @@ export default function AppContextProvider({ children }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(API_URL);
+        const response = await axios.get("/api/products");
         setProducts(response.data);
       } catch (err) {
         console.log("error :: fetchProducts :: ", err);
