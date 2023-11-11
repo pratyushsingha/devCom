@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ProductItems from "../components/ProductItems";
 
 export const AppContext = createContext();
@@ -135,6 +136,16 @@ export default function AppContextProvider({ children }) {
   function addToCart(id) {
     const updatedCart = products.find((item) => item.id == id);
     setCart([...cart, updatedCart]);
+    toast.success("item added to cart", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
 
   function removeFromCart(id) {
@@ -143,6 +154,16 @@ export default function AppContextProvider({ children }) {
       const updatedCart = [...cart];
       updatedCart.splice(itemToRemove, 1);
       setCart(updatedCart);
+      toast.error("item removed successfully", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
@@ -154,6 +175,16 @@ export default function AppContextProvider({ children }) {
     const updatedWish = products.find((item) => item.id == id);
     setWishList([...wishList, updatedWish]);
     console.log(wishList);
+    toast.success("item added to wishlist", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
 
   function removeFromWish(id) {
@@ -162,6 +193,16 @@ export default function AppContextProvider({ children }) {
       const updatedWish = [...wishList];
       updatedWish.splice(itemToRemove, 1);
       setWishList(updatedWish);
+      toast.error("item removed successfully", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
