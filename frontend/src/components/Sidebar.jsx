@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { brand, category } from "../utlis/filters";
+import { brand, category, rating } from "../utlis/filters";
 import { AppContext } from "../context/AppContext";
 
 const Sidebar = () => {
@@ -10,7 +10,7 @@ const Sidebar = () => {
     handleInputChange,
     handlePrice,
     selectedPrice,
-    handleColor,
+    setSelectedRating,
   } = useContext(AppContext);
   return (
     <>
@@ -60,6 +60,14 @@ const Sidebar = () => {
         onChange={handlePrice}
       />
       $ {selectedPrice}
+      <br />
+      <br />
+      <h1>Rating: </h1>
+      {rating.map((rate) => (
+        <button className="flex justify-start" onClick={() => setSelectedRating(rate.star)}>
+          {rate.icon} {rate.star}
+        </button>
+      ))}
       <br />
     </>
   );
