@@ -179,7 +179,6 @@ export default function AppContextProvider({ children }) {
     handleColor,
     selectedColor,
     setSelectedColor,
-    handleBrand,
     selectedBrand,
   };
 
