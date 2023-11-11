@@ -42,4 +42,3 @@ export const rating = [
   { star: 1, icon: "⭐ ☆ ☆  ☆☆ " },
 ];
 
-export const API_URL = "http://localhost:3000/api/products";
