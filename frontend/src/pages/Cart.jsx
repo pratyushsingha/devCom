@@ -11,6 +11,8 @@ const Cart = () => {
     setCartTotal(cart.reduce((acc, crr) => acc + crr.price, 0));
     // console.log(cartTotal);
   }, [cart]);
+  const totalPrice = cartTotal + 10;
+  console.log(totalPrice);
 
   return (
     <>
@@ -73,10 +75,10 @@ const Cart = () => {
                 <div className="border-t mt-8">
                   <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                     <span>Total cost</span>
-                    <span>${cartTotal + 10}</span>
+                    <span>${totalPrice}</span>
                   </div>
                   <button
-                    onClick={() => checkout()}
+                    onClick={() => checkout(totalPrice)}
                     className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
                   >
                     Checkout

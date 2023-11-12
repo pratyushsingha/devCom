@@ -213,18 +213,52 @@ export default function AppContextProvider({ children }) {
     localStorage.setItem("wish", JSON.stringify(wishList));
   }, [wishList]);
 
-  function checkout() {
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const displayRazorpay = async (amount) => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!res) {
+      alert("u are offline");
+      return;
+    }
+    const options = {
+      key: "rzp_test_uAWwSCnAHaxv6f",
+      currency: "USD",
+      amount: amount * 100,
+      name: "pratyushsingha",
+      description: "thnx for purchasing",
+      image: "https://cdn-icons-png.flaticon.com/128/2415/2415292.png",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert("payment is successful");
+      },
+      prifill: {
+        name: "pratyushsingha",
+      },
+    };
+
+    const paymentObj = new window.Razorpay(options);
+    paymentObj.open();
+  };
+
+  function checkout(amount) {
     if (isAuthenticated) {
-      toast.success("success", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      displayRazorpay(amount);
     } else {
       toast.error("login to continue", {
         position: "bottom-left",
@@ -265,7 +299,8 @@ export default function AppContextProvider({ children }) {
     logout,
     user,
     isAuthenticated,
-    checkout
+    checkout,
+    displayRazorpay,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
