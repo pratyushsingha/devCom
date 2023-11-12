@@ -8,30 +8,30 @@ const ProductDetails = () => {
   const { products, addToWish, addToCart, selectedWish, setSelectedWish } =
     useContext(AppContext);
   const [ProductDetail, setProductDetail] = useState([]);
+  const [showDesc, setShowDesc] = useState(false);
 
   useEffect(() => {
     const product = products.find((item) => item.id == id);
     setProductDetail([product]);
   }, [products]);
 
-
   return (
     <>
       {ProductDetail.map((item) => (
         <section
           key={item.id}
-          className="text-gray-600 body-font overflow-hidden"
+          className="text-gray-600 flex justify-center item-center mx-auto body-font overflow-hidden"
         >
           <div className="container px-5 py-24 mx-auto">
-            <div className="lg:w-4/5 mx-auto flex flex-wrap">
+            <div className="lg:w-full mx-auto flex flex-wrap justify-center items-center">
               <img
                 alt={item.title}
-                className="lg:w-1/4 w-full lg:h-auto h-64 object-cover object-center rounded"
+                className="lg:w-1/6 w-full lg:h-auto h-10 object-cover object-center rounded"
                 src={item.image}
               />
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                  {item.brand.toLowerCase()}
+                  {item.brand.toUpperCase()}
                 </h2>
                 <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
                   {item.title}
@@ -93,7 +93,16 @@ const ProductDetails = () => {
                     </a>
                   </span>
                 </div>
-                <p className="leading-relaxed">{item.description}</p>
+                <p className="leading-relaxed">
+                  {!showDesc ? item.description.slice(0, 100) : item.description}
+                  ...
+                  <button
+                    onClick={() => setShowDesc(!showDesc)}
+                    className="font-bold"
+                  >
+                    {showDesc ? "show less" : "show more"}
+                  </button>
+                </p>
                 <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
                 <div className="flex">
                   <span className="title-font font-medium text-2xl text-gray-900">

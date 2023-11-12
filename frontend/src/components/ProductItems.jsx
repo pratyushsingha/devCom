@@ -6,7 +6,7 @@ const ProductItems = ({ id, image, title, price, category }) => {
       <div className="lg:w-full md:w-1/2 p-4 w-full">
         <a className="block relative h-48 rounded overflow-hidden">
           <img
-            alt="ecommerce"
+            alt={title}
             className="object-cover object-center w-3/3 h-2/3 block"
             src={image}
           />
