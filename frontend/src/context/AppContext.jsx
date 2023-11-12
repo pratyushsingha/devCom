@@ -42,8 +42,11 @@ export default function AppContextProvider({ children }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("/api/products");
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/products`
+        );
         setProducts(response.data);
+        // console.log(`${import.meta.env.VITE_BASE_URL}/products`)
       } catch (err) {
         console.log("error :: fetchProducts :: ", err);
       }

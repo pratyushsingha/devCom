@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
-
 
 const data = [
   {
@@ -299,6 +300,6 @@ app.get("/api/products", (req, res) => {
   res.json(data);
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
