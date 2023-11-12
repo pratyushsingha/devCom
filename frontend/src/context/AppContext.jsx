@@ -42,9 +42,7 @@ export default function AppContextProvider({ children }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/products`
-        );
+        const response = await axios.get("/api/products");
         setProducts(response.data);
         // console.log(`${import.meta.env.VITE_BASE_URL}/products`)
       } catch (err) {
@@ -240,9 +238,9 @@ export default function AppContextProvider({ children }) {
       return;
     }
     const options = {
-      key: "rzp_test_uAWwSCnAHaxv6f",
-      currency: "USD",
-      amount: amount * 100,
+      key: `${import.meta.env.VITE_RAZORPAY_KEY}`,
+      currency: "INR",
+      amount: amount * 100 * 83.3,
       name: "pratyushsingha",
       description: "thnx for purchasing",
       image: "https://cdn-icons-png.flaticon.com/128/2415/2415292.png",
