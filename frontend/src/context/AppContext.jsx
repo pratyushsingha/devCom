@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProductItems from "../components/ProductItems";
 import { useAuth0 } from "@auth0/auth0-react";
 
+
 export const AppContext = createContext();
 
 const getLocalCart = () => {
@@ -240,13 +241,13 @@ export default function AppContextProvider({ children }) {
     const options = {
       key: `${import.meta.env.VITE_RAZORPAY_KEY}`,
       currency: "INR",
-      amount: amount * 100 * 83.3,
+      amount: amount * 100,
       name: "pratyushsingha",
       description: "thnx for purchasing",
       image: "https://cdn-icons-png.flaticon.com/128/2415/2415292.png",
       handler: function (response) {
         alert(response.razorpay_payment_id);
-        alert("payment is successful");
+        // navigate("/");
       },
       prifill: {
         name: "pratyushsingha",
