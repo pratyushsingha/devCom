@@ -63,8 +63,8 @@ const Sidebar = () => {
       <br />
       <br />
       <h1>Rating: </h1>
-      {rating.map((rate) => (
-        <button className="flex justify-start" onClick={() => setSelectedRating(rate.star)}>
+      {rating.map((rate, index) => (
+        <button key={index} className="flex justify-start" onClick={() => setSelectedRating(rate.star)}>
           {rate.icon} {rate.star}
         </button>
       ))}
