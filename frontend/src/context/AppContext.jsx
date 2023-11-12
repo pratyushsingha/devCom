@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductItems from "../components/ProductItems";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const AppContext = createContext();
 
@@ -25,6 +26,8 @@ function getLocalWish() {
 }
 
 export default function AppContextProvider({ children }) {
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSeletectedCategory] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
@@ -210,6 +213,32 @@ export default function AppContextProvider({ children }) {
     localStorage.setItem("wish", JSON.stringify(wishList));
   }, [wishList]);
 
+  function checkout() {
+    if (isAuthenticated) {
+      toast.success("success", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error("login to continue", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
+
   const value = {
     products,
     addToCart,
@@ -232,6 +261,11 @@ export default function AppContextProvider({ children }) {
     setSelectedWish,
     setSelectedRating,
     selectedBrand,
+    loginWithRedirect,
+    logout,
+    user,
+    isAuthenticated,
+    checkout
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

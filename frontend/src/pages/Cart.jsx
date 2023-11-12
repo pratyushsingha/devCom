@@ -4,12 +4,12 @@ import CartItems from "../components/CartItems";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cart } = useContext(AppContext);
+  const { cart, checkout } = useContext(AppContext);
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     setCartTotal(cart.reduce((acc, crr) => acc + crr.price, 0));
-    console.log(cartTotal);
+    // console.log(cartTotal);
   }, [cart]);
 
   return (
@@ -75,7 +75,10 @@ const Cart = () => {
                     <span>Total cost</span>
                     <span>${cartTotal + 10}</span>
                   </div>
-                  <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                  <button
+                    onClick={() => checkout()}
+                    className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+                  >
                     Checkout
                   </button>
                 </div>
