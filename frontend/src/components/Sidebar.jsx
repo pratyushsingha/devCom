@@ -59,7 +59,7 @@ const Sidebar = () => {
         step={1}
         onChange={handlePrice}
       />
-      $ {selectedPrice}
+      ₹ {selectedPrice}
       <br />
       <br />
       <h1>Rating: </h1>
