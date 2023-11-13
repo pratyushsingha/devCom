@@ -106,7 +106,7 @@ const ProductDetails = () => {
                 <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
                 <div className="flex">
                   <span className="title-font font-medium text-2xl text-gray-900">
-                    $ {item.price}
+                  ₹ {item.price}
                   </span>
                   <button
                     className="flex ml-auto text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded"

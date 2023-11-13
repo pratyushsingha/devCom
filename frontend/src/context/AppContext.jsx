@@ -246,8 +246,20 @@ export default function AppContextProvider({ children }) {
       description: "thnx for purchasing",
       image: "https://cdn-icons-png.flaticon.com/128/2415/2415292.png",
       handler: function (response) {
-        alert(response.razorpay_payment_id);
-        // navigate("/");
+        // alert(response.razorpay_payment_id);
+        if (response.razorpay_payment_id) {
+          setCart([]);
+          toast.success(`order placed for ₹${amount}!!`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       },
       prifill: {
         name: "pratyushsingha",

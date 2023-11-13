@@ -18,7 +18,7 @@ const ProductItems = ({ id, image, title, price, category }) => {
           <h2 className="text-gray-900 title-font text-lg font-medium">
             {title.slice(0, 15)}...
           </h2>
-          <p className="mt-1">$ {price}</p>
+          <p className="mt-1">₹ {price}</p>
         </div>
       </div>
     </Link>

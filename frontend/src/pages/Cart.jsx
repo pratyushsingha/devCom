@@ -62,7 +62,7 @@ const Cart = () => {
                   <span className="font-semibold text-sm uppercase">
                     Items {cart.length}
                   </span>
-                  <span className="font-semibold text-sm">{cartTotal}$</span>
+                  <span className="font-semibold text-sm">₹ {cartTotal}</span>
                 </div>
                 <div>
                   <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -75,7 +75,7 @@ const Cart = () => {
                 <div className="border-t mt-8">
                   <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                     <span>Total cost</span>
-                    <span>${totalPrice}</span>
+                    <span>₹ {totalPrice}</span>
                   </div>
                   <button
                     onClick={() => checkout(totalPrice)}
