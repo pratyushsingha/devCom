@@ -12,14 +12,6 @@ export const navLinks = [
   { name: "contact", path: "/contact" },
 ];
 
-export const colors = [
-  { code: "#ff0000" },
-  { code: "#22D3EF" },
-  { code: "#000000" },
-  { code: "#CDD0D0" },
-  { code: "#000" },
-];
-
 export const brand = [
   { name: "All" },
   { name: "Fjallraven" },

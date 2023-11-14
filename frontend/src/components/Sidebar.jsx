@@ -21,8 +21,8 @@ const Sidebar = () => {
         value={query}
         placeholder="search..."
       />
-      <h1 className="text-lg">category: </h1>
       <br />
+      <h1 className="text-xl">category </h1>
       {category.map((item, index) => (
         <label key={index}>
           <input
@@ -35,8 +35,7 @@ const Sidebar = () => {
         </label>
       ))}
       <br />
-      <h1 className="text-lg">Brand: </h1>
-      <br />
+      <h1 className="text-xl">Brand </h1>
       {brand.map((item, index) => (
         <label key={index}>
           <input
@@ -49,7 +48,7 @@ const Sidebar = () => {
         </label>
       ))}
       <br />
-      <h1>Price: </h1>
+      <h1 className="text-xl">Price </h1>
       <input
         type="range"
         value={selectedPrice}
@@ -59,12 +58,15 @@ const Sidebar = () => {
         step={1}
         onChange={handlePrice}
       />
-      ₹ {selectedPrice}
+      <p className="flex justify-end">₹ {selectedPrice}</p>
       <br />
-      <br />
-      <h1>Rating: </h1>
+      <h1 className="text-xl">Rating </h1>
       {rating.map((rate, index) => (
-        <button key={index} className="flex justify-start" onClick={() => setSelectedRating(rate.star)}>
+        <button
+          key={index}
+          className="flex justify-start"
+          onClick={() => setSelectedRating(rate.star)}
+        >
           {rate.icon} {rate.star}
         </button>
       ))}

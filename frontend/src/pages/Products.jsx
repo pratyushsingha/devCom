@@ -7,8 +7,8 @@ const Products = () => {
   const { result, loading } = useContext(AppContext);
 
   return (
-    <div className="mx-auto">
-      <div className="flex mx-20">
+    <div className="mx-auto pl-28 pr-20 py-24">
+      <div className="flex">
         <div className="flex flex-col">
           <Sidebar />
         </div>
