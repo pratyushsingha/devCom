@@ -234,15 +234,24 @@ export default function AppContextProvider({ children }) {
       "https://checkout.razorpay.com/v1/checkout.js"
     );
     if (!res) {
-      alert("u are offline");
+      toast.error("you're offline!!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
     const options = {
       key: `${import.meta.env.VITE_RAZORPAY_KEY}`,
       currency: "INR",
       amount: amount * 100,
-      name: "pratyushsingha",
-      description: "thnx for purchasing",
+      name: user.name,
+      description: "thanks for purchasing",
       image: "https://cdn-icons-png.flaticon.com/128/2415/2415292.png",
       handler: function (response) {
         // alert(response.razorpay_payment_id);
@@ -261,7 +270,7 @@ export default function AppContextProvider({ children }) {
         }
       },
       prifill: {
-        name: "pratyushsingha",
+        name: user.name,
       },
     };
 
