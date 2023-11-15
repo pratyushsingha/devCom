@@ -42,3 +42,20 @@ export const rating = [
   { star: 1, icon: "⭐ ☆ ☆  ☆☆ " },
 ];
 
+export const HomeCategory = [
+  {
+    name: "Men's Clothing",
+    img: "/menCategory.webp",
+    slug:"Best T'shirt For Men!!!"
+  },
+  {
+    name: "Electronics",
+    img: "/electronicsCategory.webp",
+    slug:"SSD's At Cheapest Price,Grab Now!!!"
+  },
+  {
+    name: "Women's Clothing",
+    img: "/womanCategory.webp",
+    slug:"Jacket's For Sell Girls Hurry up!!!"
+  },
+];
