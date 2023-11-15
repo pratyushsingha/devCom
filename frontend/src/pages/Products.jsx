@@ -8,7 +8,7 @@ const Products = () => {
 
   return (
     <div className="mx-auto">
-      <div className="flex mx-20">
+      <div className="flex px-24 py-24">
         <div className="flex flex-col">
           <Sidebar />
         </div>

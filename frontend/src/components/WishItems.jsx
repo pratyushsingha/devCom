@@ -23,7 +23,7 @@ const WishItems = ({ item }) => {
         </div>
       </div>
       <span className="text-center w-1/5 font-semibold text-sm">
-        $ {item.price}
+      ₹ {item.price}
       </span>
       <div className="flex justify-center w-1/5">
         <button

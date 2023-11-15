@@ -23,7 +23,7 @@ const Navbar = () => {
               key={index}
               className="mr-5 hover:text-gray-900"
             >
-              {item.name.toLocaleUpperCase()}
+              {item.name.toUpperCase()}
             </Link>
           ))}
         </nav>
