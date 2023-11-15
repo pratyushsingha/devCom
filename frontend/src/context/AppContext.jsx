@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductItems from "../components/ProductItems";
 import { useAuth0 } from "@auth0/auth0-react";
-
-
 export const AppContext = createContext();
 
 const getLocalCart = () => {
@@ -39,15 +37,16 @@ export default function AppContextProvider({ children }) {
   const [cart, setCart] = useState(getLocalCart());
   const [wishList, setWishList] = useState(getLocalWish());
   const [selectedWish, setSelectedWish] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/products");
         setProducts(response.data);
-        // console.log(`${import.meta.env.VITE_BASE_URL}/products`)
       } catch (err) {
         console.log("error :: fetchProducts :: ", err);
+        setError(true);
       }
       setLoading(false);
     };
@@ -179,7 +178,7 @@ export default function AppContextProvider({ children }) {
   function addToWish(id) {
     const updatedWish = products.find((item) => item.id == id);
     setWishList([...wishList, updatedWish]);
-    console.log(wishList);
+    // console.log(wishList);
     toast.success("item added to wishlist", {
       position: "bottom-left",
       autoClose: 5000,
@@ -315,6 +314,7 @@ export default function AppContextProvider({ children }) {
     isAuthenticated,
     checkout,
     displayRazorpay,
+    error,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
