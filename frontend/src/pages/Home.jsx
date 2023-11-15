@@ -6,7 +6,6 @@ import { HomeCategory } from "../utlis/filters";
 const Home = () => {
   const { handleCategory } = useContext(AppContext);
 
-  function test(e) {}
   return (
     <>
       <section className="text-gray-600 body-font">
@@ -31,11 +30,8 @@ const Home = () => {
               truffaut hexagon try-hard chambray.
             </p>
             <div className="flex justify-center">
-              <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                Button
-              </button>
               <Link to={"/products"}>
-                <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+                <button className="ml-4 inline-flex text-white bg-black border-0 py-2 px-6 focus:outline-none hover:bg-gray-800 rounded text-lg">
                   Show Now
                 </button>
               </Link>
@@ -49,14 +45,14 @@ const Home = () => {
           <div className="flex flex-wrap -m-4">
             {HomeCategory.map((category, index) => (
               <div key={index} className="p-4 md:w-1/3">
-                <Link to={"/products"}>
-                  <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                    <img
-                      className="lg:h-48 md:h-36 w-full"
-                      src={category.img}
-                      alt={category.name}
-                    />
-                    <div className="p-6">
+                <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                  <img
+                    className="lg:h-48 md:h-36 w-full"
+                    src={category.img}
+                    alt={category.name}
+                  />
+                  <div className="p-6">
+                    <Link to={"/products"}>
                       <button
                         className="title-font text-lg font-medium text-gray-900 mb-3"
                         value={category.name}
@@ -64,9 +60,9 @@ const Home = () => {
                       >
                         {category.slug}
                       </button>
-                    </div>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </div>
             ))}
           </div>
