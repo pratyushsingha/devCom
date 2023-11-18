@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { brand, category, rating } from "../utlis/filters";
 import { AppContext } from "../context/AppContext";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
@@ -44,8 +44,8 @@ const Sidebar = () => {
         </button>
       </div>
       {brand.map((item, index) => (
-        <div className={showBrand ? "block" : "hidden"}>
-          <label key={index}>
+        <div key={index} className={showBrand ? "block" : "hidden"}>
+          <label>
             <input
               type="radio"
               name="brand"

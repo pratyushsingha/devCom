@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { MdDelete } from "react-icons/md";
@@ -48,7 +48,7 @@ const WishItems = ({ item }) => {
         onClick={() => removeFromWish(item.id)}
         className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
       >
-        <MdDelete className="text-lg"/>
+        <MdDelete className="text-lg" />
       </button>
     </div>
   );

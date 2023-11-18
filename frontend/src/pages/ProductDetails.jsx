@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -6,22 +6,15 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const {
-    products,
-    wishList,
-    addToWish,
-    addToCart,
-    quantityRemove,
-    removeFromWish,
-    cart,
-  } = useContext(AppContext);
+  const { products, wishList, addToWish, addToCart, removeFromWish, cart } =
+    useContext(AppContext);
   const [ProductDetail, setProductDetail] = useState([]);
   const [showDesc, setShowDesc] = useState(false);
 
   useEffect(() => {
     const product = products.find((item) => item.id == id);
     setProductDetail([product]);
-  }, [products]);
+  }, [products,id]);
 
   return (
     <>
