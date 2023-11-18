@@ -1,12 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const { products, wishList, addToWish, addToCart, removeFromWish } =
-    useContext(AppContext);
+  const {
+    products,
+    wishList,
+    addToWish,
+    addToCart,
+    quantityRemove,
+    removeFromWish,
+    cart,
+  } = useContext(AppContext);
   const [ProductDetail, setProductDetail] = useState([]);
   const [showDesc, setShowDesc] = useState(false);
 
@@ -105,41 +113,26 @@ const ProductDetails = () => {
                     {showDesc ? "show less" : "show more"}
                   </button>
                 </p>
-                <div className="flex mt-4 justify-center w-1/5">
-                  <span className="text-black mx-3">Quantity: </span>
-                  <button>
-                    <svg
-                      className="fill-current text-gray-600 w-3"
-                      viewBox="0 0 448 512"
-                    >
-                      <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                    </svg>
-                  </button>
-                  <input
-                    className="mx-2 border text-center w-8"
-                    type="text"
-                    defaultValue={1}
-                  />
-                  <button>
-                    <svg
-                      className="fill-current text-gray-600 w-3"
-                      viewBox="0 0 448 512"
-                    >
-                      <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                    </svg>
-                  </button>
-                </div>
                 <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
                 <div className="flex">
                   <span className="title-font font-medium text-2xl text-gray-900">
                     ₹ {item.price}
                   </span>
-                  <button
-                    className="flex ml-auto text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded"
-                    onClick={() => addToCart(id)}
-                  >
-                    Add to Cart
-                  </button>
+                  {cart.cartItem.some((itemm) => itemm.id == item.id) ? (
+                    <button
+                      className="flex ml-auto text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded"
+                      onClick={() => navigate("/cart")}
+                    >
+                      Go to Cart
+                    </button>
+                  ) : (
+                    <button
+                      className="flex ml-auto text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded"
+                      onClick={() => addToCart(id)}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
                   {/* TODO: refactor the removeFromWish....why only id is not working */}
                   {wishList.some((wish) => wish.id == id) ? (
                     <button

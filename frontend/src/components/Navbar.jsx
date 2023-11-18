@@ -52,7 +52,7 @@ const Navbar = () => {
         <Link to={"/cart"}>
           <button className="self-center flex space-x-2 text-2xl">
             <AiOutlineShoppingCart />
-            <p className="text-lg self-center">{cart.length}</p>
+            <p className="text-lg self-center">{cart.cartItem.length}</p>
           </button>
         </Link>
         <Link to={"/wishList"}>
