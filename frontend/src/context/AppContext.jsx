@@ -121,7 +121,7 @@ export default function AppContextProvider({ children }) {
     }
 
     return filteredProducts.map(({ id, title, price, image, category }) => (
-      <ProductItems
+      <ProductItems key={id}
         id={id}
         image={image}
         title={title}

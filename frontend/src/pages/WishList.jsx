@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 import WishItems from "../components/WishItems";
@@ -39,9 +39,7 @@ const WishList = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center h-screen">
-          <h1 className="text-2xl ">
-            Wishlist is empty
-          </h1>
+          <h1 className="text-2xl ">Wishlist is empty</h1>
         </div>
       )}
     </>
