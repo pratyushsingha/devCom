@@ -268,7 +268,7 @@ export default function AppContextProvider({ children }) {
       handler: function (response) {
         // alert(response.razorpay_payment_id);
         if (response.razorpay_payment_id) {
-          setCart([]);
+          setCart({ cartItem: [] });
           toast.success(`order placed for ₹${amount}!!`, {
             position: "bottom-left",
             autoClose: 5000,
