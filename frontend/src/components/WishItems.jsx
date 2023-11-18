@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { MdDelete } from "react-icons/md";
 
 const WishItems = ({ item }) => {
-  const { removeFromWish, addToCart } = useContext(AppContext);
+  const { removeFromWish, addToCart, removeFromCart, cart } =
+    useContext(AppContext);
   return (
     <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
       <div className="flex w-2/5">
@@ -23,21 +25,30 @@ const WishItems = ({ item }) => {
         </div>
       </div>
       <span className="text-center w-1/5 font-semibold text-sm">
-      ₹ {item.price}
+        ₹ {item.price}
       </span>
       <div className="flex justify-center w-1/5">
-        <button
-          onClick={() => addToCart(item.id)}
-          className="bg-green-500 hover:bg-green-600 px-5 py-2 text-sm text-white uppercase"
-        >
-          Add to cart
-        </button>
+        {cart.cartItem.some((cartItem) => cartItem.id === item.id) ? (
+          <button
+            onClick={() => removeFromCart(item.id)}
+            className="bg-green-500 hover:bg-green-600 px-5 py-2 text-sm text-white uppercase"
+          >
+            Remove from cart
+          </button>
+        ) : (
+          <button
+            onClick={() => addToCart(item.id)}
+            className="bg-green-500 hover:bg-green-600 px-5 py-2 text-sm text-white uppercase"
+          >
+            Add to cart
+          </button>
+        )}
       </div>
       <button
         onClick={() => removeFromWish(item.id)}
         className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
       >
-        Remove
+        <MdDelete className="text-lg"/>
       </button>
     </div>
   );

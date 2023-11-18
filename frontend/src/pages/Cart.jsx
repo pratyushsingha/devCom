@@ -8,15 +8,20 @@ const Cart = () => {
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    setCartTotal(cart.reduce((acc, crr) => acc + crr.price, 0));
+    setCartTotal(
+      cart.cartItem.reduce((acc, crr) => acc + crr.price * crr.quantity, 0)
+    );
     // console.log(cartTotal);
-  }, [cart]);
+  }, [cart.cartItem]);
   const totalPrice = cartTotal + 10;
   console.log(totalPrice);
 
+  // useEffect(console.log(cart.cartItem), [cart]);
+  // console.log(cart.cartItem.price)
+
   return (
     <>
-      {cart.length > 0 ? (
+      {cart.cartItem.length > 0 ? (
         <>
           <div className="container mx-auto mt-10">
             <div className="flex shadow-md my-10">
@@ -24,7 +29,7 @@ const Cart = () => {
                 <div className="flex justify-between border-b pb-8">
                   <h1 className="font-semibold text-2xl">Shopping Cart</h1>
                   <h2 className="font-semibold text-2xl">
-                    {cart.length} Items
+                    {cart.cartItem.length} Items
                   </h2>
                 </div>
                 <div className="flex mt-10 mb-5">
@@ -38,7 +43,7 @@ const Cart = () => {
                     Price
                   </h3>
                 </div>
-                {cart.map((item, index) => (
+                {cart.cartItem.map((item, index) => (
                   <CartItems item={item} key={index} />
                 ))}
                 <Link
@@ -60,7 +65,7 @@ const Cart = () => {
                 </h1>
                 <div className="flex justify-between mt-10 mb-5">
                   <span className="font-semibold text-sm uppercase">
-                    Items {cart.length}
+                    Items {cart.cartItem.length}
                   </span>
                   <span className="font-semibold text-sm">₹ {cartTotal}</span>
                 </div>

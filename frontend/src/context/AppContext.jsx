@@ -34,7 +34,9 @@ export default function AppContextProvider({ children }) {
   const [selectedRating, setSelectedRating] = useState(null);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState(getLocalCart());
+  const [cart, setCart] = useState({
+    cartItem: getLocalCart(),
+  });
   const [wishList, setWishList] = useState(getLocalWish());
   const [selectedWish, setSelectedWish] = useState(false);
   const [error, setError] = useState(false);
@@ -139,40 +141,50 @@ export default function AppContextProvider({ children }) {
 
   function addToCart(id) {
     const updatedCart = products.find((item) => item.id == id);
-    setCart([...cart, updatedCart]);
-    toast.success("item added to cart", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }
 
-  function removeFromCart(id) {
-    const itemToRemove = cart.findIndex((item) => item.id === id);
-    if (itemToRemove !== -1) {
-      const updatedCart = [...cart];
-      updatedCart.splice(itemToRemove, 1);
-      setCart(updatedCart);
-      toast.error("item removed successfully", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+    if (cart.cartItem.some((item) => item.id == updatedCart.id)) {
+      setCart((prev) => ({
+        ...prev,
+        cartItem: prev.cartItem.map((item) =>
+          item.id === updatedCart.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        ),
+      }));
+    } else {
+      setCart((prev) => ({
+        ...prev,
+        cartItem: [...prev.cartItem, { ...updatedCart, quantity: 1 }],
+      }));
     }
   }
 
+  function quantityRemove(id) {
+    const updatedCart = products.find((item) => item.id == id);
+    cart.cartItem.map((item) =>
+      item.quantity <= 1
+        ? removeFromCart(id)
+        : setCart((prev) => ({
+            ...prev,
+            cartItem: prev.cartItem.map((item) =>
+              item.id === updatedCart.id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          }))
+    );
+  }
+
+  function removeFromCart(id) {
+    const removeItem = cart.cartItem.filter((item) => item.id !== id);
+    console.log(removeItem);
+    setCart((prev) => ({
+      ...prev,
+      cartItem: removeItem,
+    }));
+  }
   useEffect(() => {
-    localStorage.setItem("lists", JSON.stringify(cart));
+    localStorage.setItem("lists", JSON.stringify(cart.cartItem));
   }, [cart]);
 
   function addToWish(id) {
@@ -324,6 +336,7 @@ export default function AppContextProvider({ children }) {
     checkout,
     displayRazorpay,
     error,
+    quantityRemove,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
